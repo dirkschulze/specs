@@ -346,7 +346,7 @@ Note: The 'clip-rule' property does not apply to <<basic-shape>>s.
 
 <pre class='propdef'>
 Name: mask-image
-Value: <<mask-reference>>
+Value: <<mask-reference>>#
 Initial: none
 Applies to: All elements. In SVG, it applies to <a href='http://www.w3.org/TR/2011/REC-SVG11-20110816/intro.html#TermContainerElement'>container elements</a> without the <a href='http://www.w3.org/TR/2011/REC-SVG11-20110816/struct.html#DefsElement'><code class='element-name'>&lt;defs></code></a> element and all <a href='http://www.w3.org/TR/2011/REC-SVG11-20110816/intro.html#TermGraphicsElement'>graphics elements</a>
 Inherited: no
@@ -653,7 +653,58 @@ Specifies the size of the mask images.
 
 See 'background-size' property [[!CSS3BG]] for the definitions of the property values.
 
+<h3 id="the-mask-composite">Compositing mask layers: the 'mask-composite' property</h3>
+
 <h3 id="the-mask">Mask Shorthand: the 'mask' property</h3>
+
+<pre class='propdef'>
+Name: mask-composite
+Value: <<composite-operator>>#
+Initial: source-over
+Applies to: All elements. In SVG, it applies to container elements without the <defs> element and all graphics elements
+Inherited: no
+Percentages: n/a
+Computed value: as specified
+Media: visual
+Animatable: no
+</pre>
+
+<pre class=prod><dfn>&lt;composite-operator></dfn> = clear | copy | source-over | source-in | source-out | source-atop |
+    destination-over | destination-in | destination-out | destination-atop | xor | lighter</pre>
+
+Defines a Porter Duff compositing operator for each mask layer [[!COMPOSITING-1]].
+
+A specified compositing operator defines the compositing operation for the current mask layer witht the immediate mask layer below it. If there is no further mask layer, the compositing operator must be ignored. Mask layers must not composite with the element's content or the content behind the element, instead they must act as if they are rendered into an isolated group.
+
+<dl dfn-for=mask-composite dfn-type=value>
+  <dt><dfn>clear</dfn></dt>
+  <dd>The Porter Duff composite operator <a href="http://www.w3.org/TR/compositing-1/#porterduffcompositingoperators_clear">Clear</a>.</dd>
+  <dt><dfn>copy</dfn></dt>
+  <dd>The Porter Duff composite operator <a href="http://www.w3.org/TR/compositing-1/#porterduffcompositingoperators_src">Copy</a>.</dd>
+  <dt><dfn>source-over</dfn></dt>
+  <dd>The Porter Duff composite operator <a href="http://www.w3.org/TR/compositing-1/#porterduffcompositingoperators_srcover">Source Over</a>.</dd>
+  <dt><dfn>source-in</dfn></dt>
+  <dd>The Porter Duff composite operator <a href="http://www.w3.org/TR/compositing-1/#porterduffcompositingoperators_srcin">Source In</a>.</dd>
+  <dt><dfn>source-out</dfn></dt>
+  <dd>The Porter Duff composite operator <a href="http://www.w3.org/TR/compositing-1/#porterduffcompositingoperators_srcout">Source Out</a>.</dd>
+  <dt><dfn>source-atop</dfn></dt>
+  <dd>The Porter Duff composite operator <a href="http://www.w3.org/TR/compositing-1/#porterduffcompositingoperators_srcatop">Source Atop</a>.</dd>
+  <dt><dfn>destination-over</dfn></dt>
+  <dd>The Porter Duff composite operator <a href="http://www.w3.org/TR/compositing-1/#porterduffcompositingoperators_dstover">Destination Over</a>.</dd>
+  <dt><dfn>destination-in</dfn></dt>
+  <dd>The Porter Duff composite operator <a href="http://www.w3.org/TR/compositing-1/#porterduffcompositingoperators_dstin">Destination In</a>.</dd>
+  <dt><dfn>destination-out</dfn></dt>
+  <dd>The Porter Duff composite operator <a href="http://www.w3.org/TR/compositing-1/#porterduffcompositingoperators_dstout">Destination Out</a>.</dd>
+  <dt><dfn>destination-atop</dfn></dt>
+  <dd>The Porter Duff composite operator <a href="http://www.w3.org/TR/compositing-1/#porterduffcompositingoperators_dstatop">Destination Atop</a>.</dd>
+  <dt><dfn>xor</dfn></dt>
+  <dd>The Porter Duff composite operator <a href="http://www.w3.org/TR/compositing-1/#porterduffcompositingoperators_xor">XOR</a>.</dd>
+  <dt><dfn>lighter</dfn></dt>
+  <dd>The Porter Duff composite operator <a href="http://www.w3.org/TR/compositing-1/#porterduffcompositingoperators_plus">Lighter</a>.</dd>
+</dl>
+
+<div clas=example>
+</div>
 
 <pre class='propdef'>
 Name: mask
