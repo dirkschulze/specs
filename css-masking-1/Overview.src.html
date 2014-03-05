@@ -633,8 +633,6 @@ See 'background-size' property [[!CSS3BG]] for the definitions of the property v
 
 <h3 id="the-mask-composite">Compositing mask layers: the 'mask-composite' property</h3>
 
-<h3 id="the-mask">Mask Shorthand: the 'mask' property</h3>
-
 <pre class='propdef'>
 Name: mask-composite
 Value: <<composite-operator>>#
@@ -652,7 +650,7 @@ Animatable: no
 
 Defines a Porter Duff compositing operator for each mask layer [[!COMPOSITING-1]].
 
-A specified compositing operator defines the compositing operation for the current mask layer witht the immediate mask layer below it. If there is no further mask layer, the compositing operator must be ignored. Mask layers must not composite with the element's content or the content behind the element, instead they must act as if they are rendered into an isolated group.
+A specified compositing operator defines the compositing operation for the current mask layer with the immediate mask layer below it. If there is no further mask layer, the compositing operator must be ignored. Mask layers must not composite with the element's content or the content behind the element, instead they must act as if they are rendered into an isolated group.
 
 <dl dfn-for=mask-composite dfn-type=value>
   <dt><dfn>clear</dfn></dt>
@@ -681,12 +679,38 @@ A specified compositing operator defines the compositing operation for the curre
   <dd>The Porter Duff composite operator <a href="http://www.w3.org/TR/compositing-1/#porterduffcompositingoperators_plus">Lighter</a>.</dd>
 </dl>
 
-<div clas=example>
+<div class=example>
+An example of the initial compositing operator <i for=mask-composite value>source-over</i>. Both mask layers will be drawn on top of each other. The result will be used to mask the content of the element.
+
+<pre><code class=css>
+mask-image: circle.svg, rect.svg;
+mask-composite: source-over;
+</code></pre>
 </div>
+
+<div class=example>
+An example of the compositing operator <i for=mask-composite value>destination-in</i>. The top layer “masks” the mask layer below. Just areas where both, <code>circle.svg</code> and <code>rect.svg</code> are visible will be used as mask.
+
+<pre><code class=css>
+mask-image: circle.svg, rect.svg;
+mask-composite: destination-in;
+</code></pre>
+</div>
+
+<div class=example>
+An example of the compositing operator <i for=mask-composite value>xor</i>. The resulting mask will be the visible areas of <code>circle.svg</code> and <code>rect.svg</code> where both do NOT overlap.
+
+<pre><code class=css>
+mask-image: circle.svg, rect.svg;
+mask-composite: xor;
+</code></pre>
+</div>
+
+<h3 id="the-mask">Mask Shorthand: the 'mask' property</h3>
 
 <pre class='propdef'>
 Name: mask
-Value: <<mask-layer>>
+Value: <<mask-layer>>#
 Initial: border-box
 Applies to: All elements. In SVG, it applies to <a>container elements</a> without the <a>'defs'</a> element and all <a>graphics elements</a>
 Inherited: no
@@ -697,7 +721,7 @@ Animatable: see individual properties
 </pre>
 
 <pre class=prod><dfn>&lt;mask-layer></dfn> = <<mask-reference>> <<source-type>>? || <<position>> [ / <<bg-size>> ]? ||
-    <<repeat-style>> || <<geometry-box>> || [ <<geometry-box>> | no-clip ]</pre>
+    <<repeat-style>> || <<geometry-box>> || [ <<geometry-box>> | no-clip ] || <<composite-operator>></pre>
 
 If one <<geometry-box>> value is present then it sets both 'mask-origin' and 'mask-clip' to that value. If two <<geometry-box>> values are present, then the first sets 'mask-origin' and the second 'mask-clip'.
 

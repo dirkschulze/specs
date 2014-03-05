@@ -1101,14 +1101,12 @@ body {
 
 <h3 class="heading settled heading" data-level=7.8 id=the-mask-composite><span class=secno>7.8 </span><span class=content>Compositing mask layers: the <a class=property data-link-type=propdesc href=#propdef-mask-composite title=mask-composite>mask-composite</a> property</span><a class=self-link href=#the-mask-composite></a></h3>
 
-<h3 class="heading settled heading" data-level=7.9 id=the-mask><span class=secno>7.9 </span><span class=content>Mask Shorthand: the <a class=property data-link-type=propdesc href=#propdef-mask title=mask>mask</a> property</span><a class=self-link href=#the-mask></a></h3>
-
 <table class="definition propdef"><tr><th>Name:<td><dfn class=css-code data-dfn-type=property data-export="" id=propdef-mask-composite>mask-composite<a class=self-link href=#propdef-mask-composite></a></dfn><tr><th>Value:<td class=prod><a class="production css-code" data-link-type=type href=#typedef-composite-operator title="<composite-operator>">&lt;composite-operator&gt;</a>#<tr><th>Initial:<td>source-over<tr><th>Applies to:<td>All elements. In SVG, it applies to container elements without the <defs> element and all graphics elements</defs><tr><th>Inherited:<td>no<tr><th>Media:<td>visual<tr><th>Computed value:<td>as specified<tr><th>Percentages:<td>n/a<tr><th>Animatable:<td>no</table>
 <pre class=prod><dfn class=css-code data-dfn-type=type data-export="" id=typedef-composite-operator>&lt;composite-operator&gt;<a class=self-link href=#typedef-composite-operator></a></dfn> = clear | copy | source-over | source-in | source-out | source-atop |
     destination-over | destination-in | destination-out | destination-atop | xor | lighter</pre>
 <p>Defines a Porter Duff compositing operator for each mask layer <a data-biblio-type=normative data-link-type=biblio href=#compositing-1 title=compositing-1>[COMPOSITING-1]</a>.
 
-<p>A specified compositing operator defines the compositing operation for the current mask layer witht the immediate mask layer below it. If there is no further mask layer, the compositing operator must be ignored. Mask layers must not composite with the element’s content or the content behind the element, instead they must act as if they are rendered into an isolated group.
+<p>A specified compositing operator defines the compositing operation for the current mask layer with the immediate mask layer below it. If there is no further mask layer, the compositing operator must be ignored. Mask layers must not composite with the element’s content or the content behind the element, instead they must act as if they are rendered into an isolated group.
 
 <dl data-dfn-for=mask-composite data-dfn-type=value>
   <dt><dfn class=css-code data-dfn-for=mask-composite data-dfn-type=value data-export="" id=valuedef-clear>clear<a class=self-link href=#valuedef-clear></a></dfn></dt>
@@ -1137,12 +1135,35 @@ body {
   <dd>The Porter Duff composite operator <a href=http://www.w3.org/TR/compositing-1/#porterduffcompositingoperators_plus>Lighter</a>.</dd>
 </dl>
 
-<div clas=example>
-</div>
+<div class=example>
+An example of the initial compositing operator <i data-link-type=dfn for=mask-composite title=source-over value="">source-over</i>. Both mask layers will be drawn on top of each other. The result will be used to mask the content of the element.
+
+<pre><code class=css>
+mask-image: circle.svg, rect.svg;
+mask-composite: source-over;
+</code></pre></div>
+
+<div class=example>
+An example of the compositing operator <i data-link-type=dfn for=mask-composite title=destination-in value="">destination-in</i>. The top layer “masks” the mask layer below. Just areas where both, <code>circle.svg</code> and <code>rect.svg</code> are visible will be used as mask.
+
+<pre><code class=css>
+mask-image: circle.svg, rect.svg;
+mask-composite: destination-in;
+</code></pre></div>
+
+<div class=example>
+An example of the compositing operator <i data-link-type=dfn for=mask-composite title=xor value="">xor</i>. The resulting mask will be the visible areas of <code>circle.svg</code> and <code>rect.svg</code> where both do NOT overlap.
+
+<pre><code class=css>
+mask-image: circle.svg, rect.svg;
+mask-composite: xor;
+</code></pre></div>
+
+<h3 class="heading settled heading" data-level=7.9 id=the-mask><span class=secno>7.9 </span><span class=content>Mask Shorthand: the <a class=property data-link-type=propdesc href=#propdef-mask title=mask>mask</a> property</span><a class=self-link href=#the-mask></a></h3>
 
 <table class="definition propdef"><tr><th>Name:<td><dfn class=css-code data-dfn-type=property data-export="" id=propdef-mask>mask<a class=self-link href=#propdef-mask></a></dfn><tr><th>Value:<td class=prod><a class="production css-code" data-link-type=type href=#typedef-mask-layer title="<mask-layer>">&lt;mask-layer&gt;</a><tr><th>Initial:<td>border-box<tr><th>Applies to:<td>All elements. In SVG, it applies to <a href=http://www.w3.org/TR/2011/REC-SVG11-20110816/intro.html#TermContainerElement>container elements</a> without the <a href=http://www.w3.org/TR/2011/REC-SVG11-20110816/struct.html#DefsElement><code class=element-name>&lt;defs&gt;</code></a> element and all <a href=http://www.w3.org/TR/2011/REC-SVG11-20110816/intro.html#TermGraphicsElement>graphics elements</a><tr><th>Inherited:<td>no<tr><th>Media:<td>visual<tr><th>Computed value:<td>see individual properties<tr><th>Percentages:<td>see individual properties<tr><th>Animatable:<td>see individual properties</table>
 <pre class=prod><dfn class=css-code data-dfn-type=type data-export="" id=typedef-mask-layer>&lt;mask-layer&gt;<a class=self-link href=#typedef-mask-layer></a></dfn> = <a class="production css-code" data-link-type=type href=#typedef-mask-reference title="<mask-reference>">&lt;mask-reference&gt;</a> <a class="production css-code" data-link-type=type href=#typedef-source-type title="<source-type>">&lt;source-type&gt;</a>? || <a class="production css-code" data-link-type=type href=http://dev.w3.org/csswg/css-backgrounds-3/#position title="<position>">&lt;position&gt;</a> [ / <a class="production css-code" data-link-type=type href=http://dev.w3.org/csswg/css-backgrounds-3/#bg-size title="<bg-size>">&lt;bg-size&gt;</a> ]? ||
-    <a class="production css-code" data-link-type=type href=http://dev.w3.org/csswg/css-backgrounds-3/#repeat-style title="<repeat-style>">&lt;repeat-style&gt;</a> || <a class="production css-code" data-link-type=type href=#typedef-geometry-box title="<geometry-box>">&lt;geometry-box&gt;</a> || [ <a class="production css-code" data-link-type=type href=#typedef-geometry-box title="<geometry-box>">&lt;geometry-box&gt;</a> | no-clip ]</pre>
+    <a class="production css-code" data-link-type=type href=http://dev.w3.org/csswg/css-backgrounds-3/#repeat-style title="<repeat-style>">&lt;repeat-style&gt;</a> || <a class="production css-code" data-link-type=type href=#typedef-geometry-box title="<geometry-box>">&lt;geometry-box&gt;</a> || [ <a class="production css-code" data-link-type=type href=#typedef-geometry-box title="<geometry-box>">&lt;geometry-box&gt;</a> | no-clip ] || <a class="production css-code" data-link-type=type href=#typedef-composite-operator title="<composite-operator>">&lt;composite-operator&gt;</a></pre>
 <p>If one <a class="production css-code" data-link-type=type href=#typedef-geometry-box title="<geometry-box>">&lt;geometry-box&gt;</a> value is present then it sets both <a class=property data-link-type=propdesc href=#propdef-mask-origin title=mask-origin>mask-origin</a> and <a class=property data-link-type=propdesc href=#propdef-mask-clip title=mask-clip>mask-clip</a> to that value. If two <a class="production css-code" data-link-type=type href=#typedef-geometry-box title="<geometry-box>">&lt;geometry-box&gt;</a> values are present, then the first sets <a class=property data-link-type=propdesc href=#propdef-mask-origin title=mask-origin>mask-origin</a> and the second <a class=property data-link-type=propdesc href=#propdef-mask-clip title=mask-clip>mask-clip</a>.
 
 <p>The <a data-link-type=dfn href=http://dev.w3.org/csswg/css-cascade-3/#used-value title="used value">used value</a> of the properties <a class=property data-link-type=propdesc href=#propdef-mask-image title=mask-image>mask-image</a>, <a class=property data-link-type=propdesc href=#propdef-mask-repeat title=mask-repeat>mask-repeat</a>, <a class=property data-link-type=propdesc href=#propdef-mask-position title=mask-position>mask-position</a>, <a class=property data-link-type=propdesc href=#propdef-mask-clip title=mask-clip>mask-clip</a>, <a class=property data-link-type=propdesc href=#propdef-mask-origin title=mask-origin>mask-origin</a> and <a class=property data-link-type=propdesc href=#propdef-mask-size title=mask-size>mask-size</a> must have no effect if <a class="production css-code" data-link-type=type href=#typedef-mask-reference title="<mask-reference>">&lt;mask-reference&gt;</a> references a <a data-link-type=element href=#elementdef-mask title=mask>mask</a> element. In this case the element defines position, sizing and clipping of the mask image.
@@ -1680,7 +1701,7 @@ Index</span><a class=self-link href=#index></a></h2>
 <li>border-box<ul><li>value for mask-clip, <a href=#valuedef-border-box0 title="section 7.5">7.5</a>
 <li>value for mask-origin, <a href=#valuedef-border-box title="section 7.6">7.6</a>
 </ul><li>&lt;bottom&gt;, <a href=#typedef-bottom title="section Unnumbered section">Unnumbered section</a>
-<li>clear, <a href=#valuedef-clear title="section 7.9">7.9</a>
+<li>clear, <a href=#valuedef-clear title="section 7.8">7.8</a>
 <li>clip, <a href=#propdef-clip title="section Unnumbered section">Unnumbered section</a>
 <li>clip-path, <a href=#propdef-clip-path title="section 5.1">5.1</a>
 <li>clipPath, <a href=#elementdef-clippath title="section 6.1">6.1</a>
@@ -1689,14 +1710,14 @@ Index</span><a class=self-link href=#index></a></h2>
 <li>clipping region, <a href=#clipping-region title="section 5">5</a>
 <li>clip-rule, <a href=#propdef-clip-rule title="section 6.2">6.2</a>
 <li>&lt;clip-source&gt;, <a href=#typedef-clip-source title="section 5.1">5.1</a>
-<li>&lt;composite-operator&gt;, <a href=#typedef-composite-operator title="section 7.9">7.9</a>
+<li>&lt;composite-operator&gt;, <a href=#typedef-composite-operator title="section 7.8">7.8</a>
 <li>content-box<ul><li>value for mask-clip, <a href=#valuedef-content-box0 title="section 7.5">7.5</a>
 <li>value for mask-origin, <a href=#valuedef-content-box title="section 7.6">7.6</a>
-</ul><li>copy, <a href=#valuedef-copy title="section 7.9">7.9</a>
-<li>destination-atop, <a href=#valuedef-destination-atop title="section 7.9">7.9</a>
-<li>destination-in, <a href=#valuedef-destination-in title="section 7.9">7.9</a>
-<li>destination-out, <a href=#valuedef-destination-out title="section 7.9">7.9</a>
-<li>destination-over, <a href=#valuedef-destination-over title="section 7.9">7.9</a>
+</ul><li>copy, <a href=#valuedef-copy title="section 7.8">7.8</a>
+<li>destination-atop, <a href=#valuedef-destination-atop title="section 7.8">7.8</a>
+<li>destination-in, <a href=#valuedef-destination-in title="section 7.8">7.8</a>
+<li>destination-out, <a href=#valuedef-destination-out title="section 7.8">7.8</a>
+<li>destination-over, <a href=#valuedef-destination-over title="section 7.8">7.8</a>
 <li>evenodd, <a href=#evenodd title="section 6.2">6.2</a>
 <li>fill<ul><li>value for clip-path, <a href=#valuedef-fill0 title="section 5.1">5.1</a>
 <li>value for mask-clip, <a href=#valuedef-fill1 title="section 7.5">7.5</a>
@@ -1705,7 +1726,7 @@ Index</span><a class=self-link href=#index></a></h2>
 </ul><li>&lt;geometry-box&gt;, <a href=#typedef-geometry-box title="section 5.1">5.1</a>
 <li>height, <a href=#element-attrdef-height title="section 9.1">9.1</a>
 <li>&lt;left&gt;, <a href=#typedef-left title="section Unnumbered section">Unnumbered section</a>
-<li>lighter, <a href=#valuedef-lighter title="section 7.9">7.9</a>
+<li>lighter, <a href=#valuedef-lighter title="section 7.8">7.8</a>
 <li>luminance<ul><li>value for mask-type, <a href=#valuedef-luminance0 title="section 7.2">7.2</a>
 <li>value for mask-source-type, <a href=#valuedef-luminance title="section 9.2">9.2</a>
 </ul><li>margin-box<ul><li>value for mask-clip, <a href=#valuedef-margin-box0 title="section 7.5">7.5</a>
@@ -1720,7 +1741,7 @@ Index</span><a class=self-link href=#index></a></h2>
 <li>mask-box-source, <a href=#propdef-mask-box-source title="section 8.1">8.1</a>
 <li>mask-box-width, <a href=#propdef-mask-box-width title="section 8.3">8.3</a>
 <li>mask-clip, <a href=#propdef-mask-clip title="section 7.5">7.5</a>
-<li>mask-composite, <a href=#propdef-mask-composite title="section 7.9">7.9</a>
+<li>mask-composite, <a href=#propdef-mask-composite title="section 7.8">7.8</a>
 <li>maskContentUnits, <a href=#element-attrdef-maskcontentunits title="section 9.1">9.1</a>
 <li>mask-image, <a href=#propdef-mask-image title="section 7.1">7.1</a>
 <li>mask images, <a href=#mask-images title="section 4">4</a>
@@ -1747,10 +1768,10 @@ Index</span><a class=self-link href=#index></a></h2>
 <li>value for mask-origin, <a href=#valuedef-padding-box title="section 7.6">7.6</a>
 </ul><li>rect(), <a href=#funcdef-rect title="section Unnumbered section">Unnumbered section</a>
 <li>&lt;right&gt;, <a href=#typedef-right title="section Unnumbered section">Unnumbered section</a>
-<li>source-atop, <a href=#valuedef-source-atop title="section 7.9">7.9</a>
-<li>source-in, <a href=#valuedef-source-in title="section 7.9">7.9</a>
-<li>source-out, <a href=#valuedef-source-out title="section 7.9">7.9</a>
-<li>source-over, <a href=#valuedef-source-over title="section 7.9">7.9</a>
+<li>source-atop, <a href=#valuedef-source-atop title="section 7.8">7.8</a>
+<li>source-in, <a href=#valuedef-source-in title="section 7.8">7.8</a>
+<li>source-out, <a href=#valuedef-source-out title="section 7.8">7.8</a>
+<li>source-over, <a href=#valuedef-source-over title="section 7.8">7.8</a>
 <li>&lt;source-type&gt;, <a href=#typedef-source-type title="section 7.2">7.2</a>
 <li>stroke<ul><li>value for clip-path, <a href=#valuedef-stroke0 title="section 5.1">5.1</a>
 <li>value for mask-clip, <a href=#valuedef-stroke1 title="section 7.5">7.5</a>
@@ -1765,7 +1786,7 @@ Index</span><a class=self-link href=#index></a></h2>
 <li>value for mask-origin, <a href=#valuedef-view-box title="section 7.6">7.6</a>
 </ul><li>width, <a href=#element-attrdef-width title="section 9.1">9.1</a>
 <li>x, <a href=#element-attrdef-x title="section 9.1">9.1</a>
-<li>xor, <a href=#valuedef-xor title="section 7.9">7.9</a>
+<li>xor, <a href=#valuedef-xor title="section 7.8">7.8</a>
 <li>y, <a href=#element-attrdef-y title="section 9.1">9.1</a>
 </ul></div>
 
