@@ -387,11 +387,13 @@ p { mask-image: none }
 div { mask-image: url(resources.svg#mask2) }</code></pre>
 </div>
 
+See the section <a href="#layering">“Layering multiple mask images”</a> for how 'mask-image' interacts with other comma-separated mask properties to form each mask image layer.
+
 <h3 id="the-mask-type">Mask Image Interpretation: the 'mask-type' property</h3>
 
 <pre class='propdef'>
 Name: mask-type
-Value: <<source-type>>
+Value: <<source-type>>#
 Initial: auto
 Applies to: All elements. In SVG, it applies to <a href='http://www.w3.org/TR/2011/REC-SVG11-20110816/intro.html#TermContainerElement'>container elements</a> without the <a href='http://www.w3.org/TR/2011/REC-SVG11-20110816/struct.html#DefsElement'><code class='element-name'>&lt;defs></code></a> element and all <a href='http://www.w3.org/TR/2011/REC-SVG11-20110816/intro.html#TermGraphicsElement'>graphics elements</a>
 Inherited: no
@@ -445,11 +447,13 @@ Values have the following meanings:
 &lt;rect width="200" height="200" fill="green"/&gt;</code></pre>
 </div>
 
+See the section <a href="#layering">“Layering multiple mask images”</a> for how 'mask-type' interacts with other comma-separated mask properties to form each mask image layer.
+
 <h3 id="the-mask-repeat">Tiling Mask Images: The 'mask-repeat' property</h3>
 
 <pre class='propdef'>
 Name: mask-repeat
-Value: <<repeat-style>>
+Value: <<repeat-style>>#
 Initial: no-repeat
 Applies to: All elements. In SVG, it applies to <a href='http://www.w3.org/TR/2011/REC-SVG11-20110816/intro.html#TermContainerElement'>container elements</a> without the <a href='http://www.w3.org/TR/2011/REC-SVG11-20110816/struct.html#DefsElement'><code class='element-name'>&lt;defs></code></a> element and all <a href='http://www.w3.org/TR/2011/REC-SVG11-20110816/intro.html#TermGraphicsElement'>graphics elements</a>
 Inherited: no
@@ -480,11 +484,13 @@ body {
   </div>
 </div>
 
+See the section <a href="#layering">“Layering multiple mask images”</a> for how 'mask-repeat' interacts with other comma-separated mask properties to form each mask image layer.
+
 <h3 id="the-mask-position">Positioning Mask Images: the 'mask-position' property</h3>
 
 <pre class='propdef'>
 Name: mask-position
-Value: <<position>>
+Value: <<position>>#
 Initial: center
 Applies to: All elements. In SVG, it applies to <a href='http://www.w3.org/TR/2011/REC-SVG11-20110816/intro.html#TermContainerElement'>container elements</a> without the <a href='http://www.w3.org/TR/2011/REC-SVG11-20110816/struct.html#DefsElement'><code class='element-name'>&lt;defs></code></a> element and all <a href='http://www.w3.org/TR/2011/REC-SVG11-20110816/intro.html#TermGraphicsElement'>graphics elements</a>
 Inherited: no
@@ -513,11 +519,13 @@ body {
 <pre><code class=css>mask-position: right 3em bottom 10px</code></pre>
 </div>
 
+See the section <a href="#layering">“Layering multiple mask images”</a> for how 'mask-position' interacts with other comma-separated mask properties to form each mask image layer.
+
 <h3 id="the-mask-clip">Masking Area: the 'mask-clip' property</h3>
 
 <pre class='propdef'>
 Name: mask-clip
-Value: <<geometry-box>> | no-clip
+Value: [ <<geometry-box>> | no-clip ]#
 Initial: border-box
 Applies to: All elements. In SVG, it applies to <a href='http://www.w3.org/TR/2011/REC-SVG11-20110816/intro.html#TermContainerElement'>container elements</a> without the <a href='http://www.w3.org/TR/2011/REC-SVG11-20110816/struct.html#DefsElement'><code class='element-name'>&lt;defs></code></a> element and all <a href='http://www.w3.org/TR/2011/REC-SVG11-20110816/intro.html#TermGraphicsElement'>graphics elements</a>
 Inherited: no
@@ -576,11 +584,13 @@ For SVG elements without associated CSS layout box, the values <a value for=mask
 
 For elements with associated CSS layout box, the values <a value for=mask-clip>fill</a>, <a value for=mask-clip>stroke</a> and <a value for=mask-clip>view-box</a> compute to the initial value of 'mask-clip'.
 
+See the section <a href="#layering">“Layering multiple mask images”</a> for how 'mask-clip' interacts with other comma-separated mask properties to form each mask image layer.
+
 <h3 id="the-mask-origin">Positioning Area: the 'mask-origin' property</h3>
 
 <pre class='propdef'>
 Name: mask-origin
-Value: <<geometry-box>>
+Value: <<geometry-box>>#
 Initial: border-box
 Applies to: All elements. In SVG, it applies to <a href='http://www.w3.org/TR/2011/REC-SVG11-20110816/intro.html#TermContainerElement'>container elements</a> without the <a href='http://www.w3.org/TR/2011/REC-SVG11-20110816/struct.html#DefsElement'><code class='element-name'>&lt;defs></code></a> element and all <a href='http://www.w3.org/TR/2011/REC-SVG11-20110816/intro.html#TermGraphicsElement'>graphics elements</a>
 Inherited: no
@@ -635,11 +645,13 @@ For elements with associated CSS layout box, the values <a value for=mask-origin
 
 Note: If 'mask-clip' is <a value for=mask-origin>padding-box</a>, 'mask-origin' is <a value for=mask-origin>border-box</a>, 'mask-position' is ''top left'' (the initial value), and the element has a non-zero border, then the top and left of the mask image will be clipped.
 
+See the section <a href="#layering">“Layering multiple mask images”</a> for how 'mask-origin' interacts with other comma-separated mask properties to form each mask image layer.
+
 <h3 id="the-mask-size">Sizing Mask Images: the 'mask-size' property</h3>
 
 <pre class='propdef'>
 Name: mask-size
-Value: <<bg-size>>
+Value: <<bg-size>>#
 Initial: border-box
 Applies to: All elements. In SVG, it applies to <a href='http://www.w3.org/TR/2011/REC-SVG11-20110816/intro.html#TermContainerElement'>container elements</a> without the <a href='http://www.w3.org/TR/2011/REC-SVG11-20110816/struct.html#DefsElement'><code class='element-name'>&lt;defs></code></a> element and all <a href='http://www.w3.org/TR/2011/REC-SVG11-20110816/intro.html#TermGraphicsElement'>graphics elements</a>
 Inherited: no
@@ -652,6 +664,8 @@ Animatable: as <a href="http://dev.w3.org/csswg/css3-transitions/#animtype-simpl
 Specifies the size of the mask images.
 
 See 'background-size' property [[!CSS3BG]] for the definitions of the property values.
+
+See the section <a href="#layering">“Layering multiple mask images”</a> for how 'mask-size' interacts with other comma-separated mask properties to form each mask image layer.
 
 <h3 id="the-mask-composite">Compositing mask layers: the 'mask-composite' property</h3>
 
@@ -732,7 +746,7 @@ mask-composite: xor;
 
 <pre class='propdef'>
 Name: mask
-Value: <<mask-layer>>
+Value: <<mask-layer>>#
 Initial: border-box
 Applies to: All elements. In SVG, it applies to <a href='http://www.w3.org/TR/2011/REC-SVG11-20110816/intro.html#TermContainerElement'>container elements</a> without the <a href='http://www.w3.org/TR/2011/REC-SVG11-20110816/struct.html#DefsElement'><code class='element-name'>&lt;defs></code></a> element and all <a href='http://www.w3.org/TR/2011/REC-SVG11-20110816/intro.html#TermGraphicsElement'>graphics elements</a>
 Inherited: no
@@ -790,6 +804,14 @@ Note: SVG <a href='http://www.w3.org/TR/2011/REC-SVG11-20110816/intro.html#TermG
 The effect of a mask is identical to what would have happened if there were no mask but instead the alpha channel of the given object were multiplied with the mask's resulting mask values.
 
 Regions not covered by a mask image are treated as transparent black. The mask value is 0.
+
+<h4 id="layering">Layering Multiple Mask Images</h4>
+
+The mask of a box can have multiple layers. The number of layers is determined by the number of comma-separated values for the 'mask-image' property. Note that a value of ''none'' still creates a layer.
+
+See <a href="http://www.w3.org/TR/css3-background/#layering">Layering Multiple Background Images</a> [[!CSS3BG]].
+
+All mask images are transformed to alpha masks (if necessary see <a href="#MaskValue">Mask processing</a>) and combined by compositing taking the compositing operators specified by 'mask-composite' into account.
 
 <h2 id="box-masks">Box Masks</h2>
 
