@@ -1121,7 +1121,7 @@ body {
 <p>A specified compositing operator defines the compositing operation for the current mask layer with the immediate mask layer below it. If there is no further mask layer, the compositing operator must be ignored. Mask layers must not composite with the element’s content or the content behind the element, instead they must act as if they are rendered into an isolated group.
 
 <div class=example>
-An example of the initial compositing operator <i data-link-type=dfn for=mask-composite title=source-over value="">source-over</i>. Both mask layers will be drawn on top of each other. The result will be used to mask the content of the element.
+An example of the initial compositing operator <em>source-over</em>. Both mask layers will be drawn on top of each other. The result will be used to mask the content of the element.
 
 <pre><code class=css>
 mask-image: circle.svg, rect.svg;
@@ -1130,7 +1130,7 @@ mask-composite: source-over;
 </div>
 
 <div class=example>
-An example of the compositing operator <i data-link-type=dfn for=mask-composite title=destination-in value="">destination-in</i>. The top layer “masks” the mask layer below. Just areas where both, <code>circle.svg</code> and <code>rect.svg</code> are visible will be used as mask.
+An example of the compositing operator <em>destination-in</em>. The top layer “masks” the mask layer below. Just areas where both, <code>circle.svg</code> and <code>rect.svg</code> are visible will be used as mask.
 
 <pre><code class=css>
 mask-image: circle.svg, rect.svg;
@@ -1139,7 +1139,7 @@ mask-composite: destination-in;
 </div>
 
 <div class=example>
-An example of the compositing operator <i data-link-type=dfn for=mask-composite title=xor value="">xor</i>. The resulting mask will be the visible areas of <code>circle.svg</code> and <code>rect.svg</code> where both do NOT overlap.
+An example of the compositing operator <em>xor</em>. The resulting mask will be the visible areas of <code>circle.svg</code> and <code>rect.svg</code> where both do NOT overlap.
 
 <pre><code class=css>
 mask-image: circle.svg, rect.svg;
@@ -1147,9 +1147,11 @@ mask-composite: xor;
 </code></pre><p><img alt="Example of xor compositing of mask layers" height=260 src=images/mask-xor.svg width=665>
 </div>
 
+<p>See the section <a href=#layering>“Layering multiple mask images”</a> for how <a class=property data-link-type=propdesc href=#propdef-mask-composite title=mask-composite>mask-composite</a> interacts with other comma-separated mask properties to form each mask image layer.
+
 <h3 class="heading settled heading" data-level=7.9 id=the-mask><span class=secno>7.9 </span><span class=content>Mask Shorthand: the <a class=property data-link-type=propdesc href=#propdef-mask title=mask>mask</a> property</span><a class=self-link href=#the-mask></a></h3>
 
-<table class="definition propdef"><tr><th>Name:<td><dfn class=css-code data-dfn-type=property data-export="" id=propdef-mask>mask<a class=self-link href=#propdef-mask></a></dfn><tr><th>Value:<td class=prod><a class="production css-code" data-link-type=type href=#typedef-mask-layer title="<mask-layer>">&lt;mask-layer&gt;</a>#<tr><th>Initial:<td>border-box<tr><th>Applies to:<td>All elements. In SVG, it applies to <a href=http://www.w3.org/TR/2011/REC-SVG11-20110816/intro.html#TermContainerElement>container elements</a> without the <a href=http://www.w3.org/TR/2011/REC-SVG11-20110816/struct.html#DefsElement><code class=element-name>&lt;defs&gt;</code></a> element and all <a href=http://www.w3.org/TR/2011/REC-SVG11-20110816/intro.html#TermGraphicsElement>graphics elements</a><tr><th>Inherited:<td>no<tr><th>Media:<td>visual<tr><th>Computed value:<td>see individual properties<tr><th>Percentages:<td>see individual properties<tr><th>Animatable:<td>see individual properties</table>
+<table class="definition propdef"><tr><th>Name:<td><dfn class=css-code data-dfn-type=property data-export="" id=propdef-mask>mask<a class=self-link href=#propdef-mask></a></dfn><tr><th>Value:<td class=prod><a class="production css-code" data-link-type=type href=#typedef-mask-layer title="<mask-layer>">&lt;mask-layer&gt;</a>#<tr><th>Initial:<td>see individual properties<tr><th>Applies to:<td>All elements. In SVG, it applies to <a href=http://www.w3.org/TR/2011/REC-SVG11-20110816/intro.html#TermContainerElement>container elements</a> without the <a href=http://www.w3.org/TR/2011/REC-SVG11-20110816/struct.html#DefsElement><code class=element-name>&lt;defs&gt;</code></a> element and all <a href=http://www.w3.org/TR/2011/REC-SVG11-20110816/intro.html#TermGraphicsElement>graphics elements</a><tr><th>Inherited:<td>no<tr><th>Media:<td>visual<tr><th>Computed value:<td>see individual properties<tr><th>Percentages:<td>see individual properties<tr><th>Animatable:<td>see individual properties</table>
 <pre class=prod><dfn class=css-code data-dfn-type=type data-export="" id=typedef-mask-layer>&lt;mask-layer&gt;<a class=self-link href=#typedef-mask-layer></a></dfn> = <a class="production css-code" data-link-type=type href=#typedef-mask-reference title="<mask-reference>">&lt;mask-reference&gt;</a> <a class="production css-code" data-link-type=type href=#typedef-source-type title="<source-type>">&lt;source-type&gt;</a>? || <a class="production css-code" data-link-type=type href=http://dev.w3.org/csswg/css-backgrounds-3/#position title="<position>">&lt;position&gt;</a> [ / <a class="production css-code" data-link-type=type href=http://dev.w3.org/csswg/css-backgrounds-3/#bg-size title="<bg-size>">&lt;bg-size&gt;</a> ]? ||
     <a class="production css-code" data-link-type=type href=http://dev.w3.org/csswg/css-backgrounds-3/#repeat-style title="<repeat-style>">&lt;repeat-style&gt;</a> || <a class="production css-code" data-link-type=type href=#typedef-geometry-box title="<geometry-box>">&lt;geometry-box&gt;</a> || [ <a class="production css-code" data-link-type=type href=#typedef-geometry-box title="<geometry-box>">&lt;geometry-box&gt;</a> | no-clip ] || <a class="production css-code" data-link-type=type href=http://dev.w3.org/fxtf/compositing-1/#ltcompositegt title="<composite-mode>">&lt;composite-mode&gt;</a></pre>
 <p>If one <a class="production css-code" data-link-type=type href=#typedef-geometry-box title="<geometry-box>">&lt;geometry-box&gt;</a> value is present then it sets both <a class=property data-link-type=propdesc href=#propdef-mask-origin title=mask-origin>mask-origin</a> and <a class=property data-link-type=propdesc href=#propdef-mask-clip title=mask-clip>mask-clip</a> to that value. If two <a class="production css-code" data-link-type=type href=#typedef-geometry-box title="<geometry-box>">&lt;geometry-box&gt;</a> values are present, then the first sets <a class=property data-link-type=propdesc href=#propdef-mask-origin title=mask-origin>mask-origin</a> and the second <a class=property data-link-type=propdesc href=#propdef-mask-clip title=mask-clip>mask-clip</a>.
@@ -1786,7 +1788,7 @@ Property index</span><a class=self-link href=#property-index></a></h2>
 <tr><th scope=row><a data-property="">mask-origin</a><td>&lt;geometry-box&gt;#<td>border-box<td>All elements. In SVG, it applies to container elements without the &lt;defs&gt; element and all graphics elements<td>no<td>n/a<td>visual<td>no<td>as specified
 <tr><th scope=row><a data-property="">mask-size</a><td>&lt;bg-size&gt;#<td>border-box<td>All elements. In SVG, it applies to container elements without the &lt;defs&gt; element and all graphics elements<td>no<td>n/a<td>visual<td>as simple list of length, percentage, or calc (This means keyword values are not animatable.)<td>as specified, but with lengths made absolute
 <tr><th scope=row><a data-property="">mask-composite</a><td>&lt;composite-mode&gt;#<td>source-over<td>All elements. In SVG, it applies to container elements without the  element and all graphics elements<td>no<td>n/a<td>visual<td>no<td>as specified
-<tr><th scope=row><a data-property="">mask</a><td>&lt;mask-layer&gt;#<td>border-box<td>All elements. In SVG, it applies to container elements without the &lt;defs&gt; element and all graphics elements<td>no<td>see individual properties<td>visual<td>see individual properties<td>see individual properties
+<tr><th scope=row><a data-property="">mask</a><td>&lt;mask-layer&gt;#<td>see individual properties<td>All elements. In SVG, it applies to container elements without the &lt;defs&gt; element and all graphics elements<td>no<td>see individual properties<td>visual<td>see individual properties<td>see individual properties
 <tr><th scope=row><a data-property="">mask-box-source</a><td>none | &lt;image&gt;<td>none<td>All elements. In SVG, it applies to container elements without the &lt;defs&gt; element and all graphics elements<td>no<td>n/a<td>visual<td>no<td>none or the image with its URI made absolute
 <tr><th scope=row><a data-property="">mask-box-slice</a><td>[&lt;number&gt; | &lt;percentage&gt;]{1,4} fill?<td>0 fill<td>All elements. In SVG, it applies to container elements without the &lt;defs&gt; element and all graphics elements<td>no<td>refer to size of the mask image<td>visual<td>no<td>as specified
 <tr><th scope=row><a data-property="">mask-box-width</a><td>[ &lt;length&gt; | &lt;percentage&gt; | &lt;number&gt; | auto ]{1,4}<td>auto<td>All elements. In SVG, it applies to container elements without the &lt;defs&gt; element and all graphics elements<td>no<td>relative to width/height of the mask box image area<td>visual<td>no<td>all &lt;length&gt;s made absolute, otherwise as specified

@@ -664,7 +664,7 @@ Defines a Porter Duff compositing operator for each mask layer [[!COMPOSITING-1]
 A specified compositing operator defines the compositing operation for the current mask layer with the immediate mask layer below it. If there is no further mask layer, the compositing operator must be ignored. Mask layers must not composite with the element's content or the content behind the element, instead they must act as if they are rendered into an isolated group.
 
 <div class=example>
-An example of the initial compositing operator <i for=mask-composite value>source-over</i>. Both mask layers will be drawn on top of each other. The result will be used to mask the content of the element.
+An example of the initial compositing operator <em>source-over</em>. Both mask layers will be drawn on top of each other. The result will be used to mask the content of the element.
 
 <pre><code class=css>
 mask-image: circle.svg, rect.svg;
@@ -674,7 +674,7 @@ mask-composite: source-over;
 </div>
 
 <div class=example>
-An example of the compositing operator <i for=mask-composite value>destination-in</i>. The top layer “masks” the mask layer below. Just areas where both, <code>circle.svg</code> and <code>rect.svg</code> are visible will be used as mask.
+An example of the compositing operator <em>destination-in</em>. The top layer “masks” the mask layer below. Just areas where both, <code>circle.svg</code> and <code>rect.svg</code> are visible will be used as mask.
 
 <pre><code class=css>
 mask-image: circle.svg, rect.svg;
@@ -684,7 +684,7 @@ mask-composite: destination-in;
 </div>
 
 <div class=example>
-An example of the compositing operator <i for=mask-composite value>xor</i>. The resulting mask will be the visible areas of <code>circle.svg</code> and <code>rect.svg</code> where both do NOT overlap.
+An example of the compositing operator <em>xor</em>. The resulting mask will be the visible areas of <code>circle.svg</code> and <code>rect.svg</code> where both do NOT overlap.
 
 <pre><code class=css>
 mask-image: circle.svg, rect.svg;
@@ -693,12 +693,14 @@ mask-composite: xor;
 <img src="images/mask-xor.svg" width="665" height="260" alt="Example of xor compositing of mask layers">
 </div>
 
+See the section <a href="#layering">“Layering multiple mask images”</a> for how 'mask-composite' interacts with other comma-separated mask properties to form each mask image layer.
+
 <h3 id="the-mask">Mask Shorthand: the 'mask' property</h3>
 
 <pre class='propdef'>
 Name: mask
 Value: <<mask-layer>>#
-Initial: border-box
+Initial: see individual properties
 Applies to: All elements. In SVG, it applies to <a>container elements</a> without the <a>'defs'</a> element and all <a>graphics elements</a>
 Inherited: no
 Percentages: see individual properties
