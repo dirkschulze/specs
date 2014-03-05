@@ -1126,7 +1126,8 @@ An example of the initial compositing operator <i data-link-type=dfn for=mask-co
 <pre><code class=css>
 mask-image: circle.svg, rect.svg;
 mask-composite: source-over;
-</code></pre></div>
+</code></pre><p><img alt="Example of source-over compositing of mask layers" height=260 src=images/mask-source-over.svg width=665>
+</div>
 
 <div class=example>
 An example of the compositing operator <i data-link-type=dfn for=mask-composite title=destination-in value="">destination-in</i>. The top layer “masks” the mask layer below. Just areas where both, <code>circle.svg</code> and <code>rect.svg</code> are visible will be used as mask.
@@ -1134,7 +1135,8 @@ An example of the compositing operator <i data-link-type=dfn for=mask-composite 
 <pre><code class=css>
 mask-image: circle.svg, rect.svg;
 mask-composite: destination-in;
-</code></pre></div>
+</code></pre><p><img alt="Example of destination-in compositing of mask layers" height=260 src=images/mask-destination-in.svg width=665>
+</div>
 
 <div class=example>
 An example of the compositing operator <i data-link-type=dfn for=mask-composite title=xor value="">xor</i>. The resulting mask will be the visible areas of <code>circle.svg</code> and <code>rect.svg</code> where both do NOT overlap.
@@ -1142,7 +1144,8 @@ An example of the compositing operator <i data-link-type=dfn for=mask-composite 
 <pre><code class=css>
 mask-image: circle.svg, rect.svg;
 mask-composite: xor;
-</code></pre></div>
+</code></pre><p><img alt="Example of xor compositing of mask layers" height=260 src=images/mask-xor.svg width=665>
+</div>
 
 <h3 class="heading settled heading" data-level=7.9 id=the-mask><span class=secno>7.9 </span><span class=content>Mask Shorthand: the <a class=property data-link-type=propdesc href=#propdef-mask title=mask>mask</a> property</span><a class=self-link href=#the-mask></a></h3>
 
