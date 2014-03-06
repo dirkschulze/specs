@@ -56,7 +56,7 @@ The effect of applying a mask to a graphical object is as if the graphical objec
 
 Masks are applied using the 'mask-image' or 'mask-box-source' properties.
 
-The 'mask-image' property may reference a <a element>mask</a> element. In this case the content of the <a element>mask</a> element is rendered into temporary canvas which has been initialized to transparent black. This temporary canvas is taken as mask image. Alternatively, for many simple uses, the 'mask-image' property may refer directly to images to be used as mask image, forgoing the need for an explicit <a element>mask</a> element. The 'mask' property serves as a shorthand property for 'mask-box', 'mask-image' and other characterizing properties.
+The 'mask-image' property may reference a <a element>mask</a> element. In this case the content of the <a element>mask</a> element is rendered into temporary canvas which has been initialized to transparent black. This temporary canvas is taken as mask image. Alternatively, for many simple uses, the 'mask-image' property may refer directly to images to be used as mask image, forgoing the need for an explicit <a element>mask</a> element. Additionally, 'mask-image' allows a list of images or references. Each list item specifies a layer of the mask that can be composited with the immediate layer below it using Porter Duff compositing operators. The combined, composited layers act as one mask. The 'mask' property serves as a shorthand property for 'mask-box', 'mask-image' and other characterizing properties.
 
 The 'mask-box-source' property splits a mask image into 9 pieces. The pieces may be sliced, scaled and stretched in various ways to fit the size of the <i>mask box image area</i>. The 'mask-box' property serves as a shorthand property for 'mask-box-source' and other characterizing properties.
 
@@ -67,6 +67,8 @@ Note: While masking gives many possibilities for enhanced graphical effects and 
 This specification defines a set of CSS properties that affect the visual rendering of elements to which those properties are applied. These effects are applied after elements have been sized and positioned according to the <a href="http://www.w3.org/TR/CSS2/visuren.html" title="Visual formatting model">Visual formatting model</a> from [[!CSS21]]. Some values of these properties result in the creation of a <a spec="css21">stacking context</a>. Furthermore, this specification replaces the section <a href="http://www.w3.org/TR/CSS2/visufx.html#clipping">Clipping: the clip property</a> from [[!CSS21]].
 
 The compositing model follows the SVG compositing model [[!SVG11]]: First the element is styled under absence of filter effects, masking, clipping and opacity. Then the element and its descendants are drawn on a temporary canvas. In a last step the following effects are applied to the element in order: filter effects [[FILTER-EFFECTS]], clipping, masking and opacity.
+
+This specification allows compositing multiple mask layers with the Porter Duff compositing operators defined in CSS Compositing and Blending [[!COMPOSITING-1]].
 
 The terms <i>object bounding box</i> and <i>stroke bounding box</i> follow the definitions in SVG 2 [[!SVG2]].
 
@@ -347,13 +349,17 @@ This property sets the mask image of an element. Where:
   </dd>
   <dt>none</dt>
   <dd>
-    A value of ''none'' counts as an image layer but does not mask the element.
+    A value of ''none'' counts as a transparent black image layer.
   </dd>
 </dl>
 
 A computed value of other than ''none'' results in the creation of a <a spec="css21">stacking context</a> [[!CSS21]] the same way that CSS 'opacity' [[CSS3COLOR]] does.
 
-A mask reference that is an empty image (zero width or zero height), that fails to download, is not a reference to an <a element>mask</a> element, is non-existent, or that cannot be displayed (e.g. because it is not in a supported image format) is ignored. It still counts as an image layer but does not mask the element.
+A mask reference that is an empty image (zero width or zero height), that fails to download, is not a reference to an <a element>mask</a> element, is non-existent, or that cannot be displayed (e.g. because it is not in a supported image format) still counts as an image layer of transparent black.
+
+Note: A value of ''none'' in a list of <<mask-reference>>s may influence the masking operation depending on the used compositing operator specified by 'mask-composite'.
+
+Note: A <<mask-source>> counts as mask layer and can be combined in a repeatable <<mask-reference>> list with <<image>> or further <<mask-source>> list items.
 
 See the section <a href="#MaskValues">“Mask processing”</a> for how to process a mask image.
 
