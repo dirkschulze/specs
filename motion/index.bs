@@ -1,0 +1,191 @@
+<h1>Motion Path Module Level 1</h1>
+<pre class='metadata'>
+Status: UD
+ED: http://dirkschulze.github.io/specs/motion-1/
+Shortname: motion
+Link Defaults: css-shapes-1 (type) <basic-shape>, css-transforms-1 (property) transform/transform-origin
+Editor: Dirk Schulze, Adobe Systems Inc., dschulze@adobe.com
+Abstract: Motion paths allow authors to animate any graphical object along an author specified path.
+</pre>
+
+<h2 id="intro">Introduction</h2>
+
+<em>This section is not normative.</em>
+
+Authors have possibilities to position objects like elements, boxes or container relative to others or absolutely in their own coordinate system. CSS Transforms extend these possibilities with a set of transform functions allowing authors to mutate the object's local coordinate system. With CSS Animations and CSS Transitions, these static placements can change over a given period in time. Both kind of animations are powerful to express transitions in time. However, both are not suitable to describe a transition in location of an object over time.
+
+This specification allows authors to specify an <i>motion path</i> the object can be transitioned along over a given period of time. The time may be static if no animation was specified.
+
+<div class="example">
+  <p>In the following example, a little symbol of a plane is animated along a motion path. The plane rotates and faces the direction of the path at each position.
+  <div class=figure>
+    <img src="images/motion-path-1.svg" width="470" height="120" alt="Example Motion Path">
+    <p class=caption>A black plane at different positions on a blue dotted motion path.</p>
+  </div>
+
+</div>
+
+A motion path may consist of a <<basic-shape>> like <<circle()>>, <<inset()>> or <<polygon()>>. To allow authors to specify curves and sub-paths, this specification extends the <<basic-shape>> functions by the <<path()>> function. The <<path()>> function takes an SVG Path string as input [[!SVG11]].
+
+<h2 id="placement">Module interactions</h2>
+
+This specification defines a set of CSS properties that affect the visual rendering of elements to which those properties are applied. These effects are applied after elements have been sized and positioned according to the <a href="http://www.w3.org/TR/CSS2/visuren.html" title="Visual formatting model">Visual formatting model</a> from [[!CSS21]]. Some values of these properties result in the creation of a <a spec="css21">stacking context</a>.
+
+Some CSS properties in this specification manipulate the user coordinate system of the element with transforms. These transforms are applied before transforms from the 'transform' property or deriving properties.
+
+The term <a href="">object bounding box</a> follows the definition in SVG 1.1 [[!SVG11]].
+
+<h2 id="values">Values</h2>
+
+This specification follows the <a href="http://www.w3.org/TR/CSS21/about.html#property-defs">CSS property definition conventions</a> from [[!CSS21]]. Basic shapes are defined in CSS Shapes Module Level 1 [[!CSS-SHAPES]]. Value types not defined in these specifications are defined in CSS Values and Units Module Level 3 [[!CSS3VAL]]. Basic shapes are extended by the <<path()>> basic shape function.
+
+In addition to the property-specific values listed in their definitions, all properties defined in this specification also accept CSS-wide keywords such as <a href="http://www.w3.org/TR/CSS21/cascade.html#value-def-inherit">inherit</a> as their property value [[!CSS3VAL]]. For readability it has not been repeated explicitly.
+
+<h2 id="motion-paths-overview">Motion Paths</h2>
+
+ISSUE: Add more details and examples.
+
+<h3 id="motion-path-property">Motion path: The 'motion-path' property</h3>
+
+<pre class='propdef'>
+Name: motion-path
+Value: <<basic-shape>> | <<path()>> | <<url>> | none
+Initial: none
+Applies to: All elements. In SVG, it applies to <a href="">container elements</a> excluding the <a href="">defs</a> element and all <a href="">graphics elements</a>
+Inherited: no
+Percentages: n/a
+Computed value: as specified
+Media: visual
+Animatable: no
+</pre>
+
+Specifies the <i>motion path</i> the element gets positioned at depending on the distance defined by 'motion-position'. A <dfn>motion path</dfn> is either a specified path with one or multiple sub-paths or the outline of an unstyled basic shape. Each shape or path must define an <dfn>initial position</dfn> and an <dfn>initial rotation</dfn>.
+
+In this specification a rotation of 0 degree is equal to the rotation of a vector from the coordinate system's origin <em>(0, 0)</em> to <em>(+Inf, 0)</em> on the horizontal axis.
+
+Values have the following meanings:
+
+<dl dfn-for="motion-path">
+  <dt><<basic-shape>></dt>
+  <dd>
+    The motion path is a basic shape as specified in CSS Shapes [[!CSS-SHAPES]]. The initial position and the initial rotation for basic shapes are defined as follows:
+    <dl>
+      <dt><<circle()>></dt>
+      <dt><<ellipse()>></dt>
+      <dd>The initial position is defined at the point where a virtual tangent to the circle/ellipse would reach the top vertical position. The initial rotation is 0 degree.</dd>
+      <dt><<inset()>></dt>
+      <dd>The initial position is defined by the left top corner of the rectangle. The initial rotation is 0 degree.</dd>
+      <dt><<polygon()>></dt>
+      <dd>The initial position is defined by the first coordinate pair of the polygon. The initial rotation is defined by the vector connecting the initial position with the next following coordinate pair that isn't equal to the initial position. If such a coordinate pair does not exist, the initial rotation is defined with 0 degree.</dd>
+    </dl>
+  </dd>
+  <dt><dfn>path()</dfn> = path(<<string>>)</dt>
+  <dd>
+    The <<string>> represents an SVG Path data string. The path data string must be conform to the grammar and parsing rules of SVG 1.1 [[!SVG11]]. The initial position is defined by the first “move to” argument in the path string. For the initial rotation follow SVG 1.1 [[!SVG11]]. 
+  </dd>
+  <dt><<url>></dt>
+  <dd>
+    References an SVG <a href="">graphics element</a> and uses it's geometry as motion path. See SVG 1.1 for more information about the initial position and initial rotation [[!SVG11]]. 
+  </dd>
+  <dt dfn-type=value><dfn>none</dfn></dt>
+  <dd>No motion path gets created.</dd>
+</dl>
+
+A computed value of other than ''none'' results in the creation of a <a spec="css21">stacking context</a> [[!CSS21]] the same way that CSS 'opacity' [[CSS3COLOR]] does for values other than ''1'', unless the element is an SVG element with out an associated CSS layout box.
+
+A reference that fails to download, is not a reference to an SVG <a href="">graphics element</a> element, or is non-existent is ignored. No motion path and no stacking context is created.
+
+See the section <a href="#motion-processing">“Motion processing”</a> for how to process a motion path.
+
+ISSUE: Which coordinate system to we use for elements with associated layout box? The canvas boundaries? The viewport boundaries? An element reference box? Do we need to allow keywords to specify this box?
+
+<h3 id="motion-position">Position on motion path: The 'motion-position' property</h3>
+
+<pre class='propdef'>
+Name: motion-position
+Value: <<length>> | <<percentage>>
+Initial: 0
+Applies to: All elements. In SVG, it applies to <a href="">container elements</a> excluding the <a href="">defs</a> element and all <a href="">graphics elements</a>
+Inherited: no
+Percentages: refer to the total path length
+Computed value: as specified
+Media: visual
+Animatable: yes
+</pre>
+
+A distance that describes the position along the specified <i>motion path</i>.
+
+<dl dfn-for="motion-position" dfn-type="value">
+  <dt><<percentage>></dt>
+  <dt><<length>></dt>
+  <dd>The distance from the <i>initial position</i> of the shape or path to the position of the element. Percentages are relative to the total path length including multiple sub-paths.</dd>
+</dl>
+
+<div class="issue">
+What happens if the position is negative or exceeds the <i>motion path</i> length?
+<ul>
+  <li>Crop values between 0% and 100%.</li>
+  <li>Use negative distance from the end of the path and jump to 0 after that. Continue till the end of the path and continue from the beginning again.</li>
+  <li>Adjust the time the same way as we adjust radial gradients on negative color stop offsets and position at beginning/end of path.</li>
+</ul>
+</div>
+
+See the section <a href="#motion-processing">“Motion processing”</a> for how to process a motion position.
+
+<h3 id="motion-rotation">Rotation at point: The 'motion-rotation' property</h3>
+
+<pre class='propdef'>
+Name: motion-rotation
+Value: [ auto | reverse ] && <<angle>>
+Initial: auto
+Applies to: All elements. In SVG, it applies to <a href="">container elements</a> excluding the <a href="">defs</a> element and all <a href="">graphics elements</a>
+Inherited: no
+Percentages: refer to the total path length
+Computed value: as specified
+Media: visual
+Animatable: yes
+</pre>
+
+Defines the rotation of the element while transitioning along the <i>motion path</i>.
+
+Values have the following meanings:
+
+<dl dfn-for="mask-rotation" dfn-type="value">
+  <dt><dfn>auto</dfn></dt>
+  <dd>Indicates that the object is rotated over time by the angle of the direction (i.e., directional tangent vector) of the motion path. If specified in combination with <<angle>>, the computed value of <<angle>> is added to the computed value of ''auto''.</dd>
+  <dt><dfn>reverse</dfn></dt>
+  <dd>
+    <p>Indicates that the object is rotated over time by the angle of the direction (i.e., directional tangent vector) of the motion path plus 180 degrees. If specified in combination with <<angle>>, the computed value of <<angle>> is added to the computed value of ''reverse''.
+      <p class="note">This is the same as specifying ''auto 180deg''.
+  </dd>
+  <dt><<angle>></dt>
+  <dd>Indicates that the target element has a constant rotation transformation applied to it by the specified rotation angle. See definitions of ''auto'' or ''reverse'' if specified in combination with either one of the keywords.</dd>
+</dl>
+
+Note: The rotation described here does not override or replace any rotation defined by the 'transform' property.
+
+ISSUE: More natural names requested for ''auto'' and ''reverse''.
+
+See the section <a href="#motion-processing">“Motion processing”</a> for how to process a motion rotation.
+
+<h3 id="motion-shorthand">Motion shorthand: The 'motion' property</h3>
+
+<pre class='propdef'>
+Name: motion
+Value: &lt;'motion-path'> && &lt;'motion-position'> && &lt;'motion-rotation'>
+Initial: see individual properties
+Applies to: All elements. In SVG, it applies to <a href="">container elements</a> excluding the <a href="">defs</a> element and all <a href="">graphics elements</a>
+Inherited: no
+Percentages: see individual properties
+Computed value: see individual properties
+Media: visual
+Animatable: see individual properties
+</pre>
+
+This is a shorthand property for setting 'motion-path', 'motion-position' and 'motion-rotation'. Omitted values are set to their initial values.
+
+<h3 id="motion-processing">Motion processing</h3>
+
+ISSUE: Describe the process.
+
+ISSUE: Do we need to specify an origin of the element in motion so that it can be positioned accordingly before the motion? Something like motion-origin? Should we reuse 'transform-origin'? (Probably not since the ''z'' coordinate doesn't make any sense.)
