@@ -193,7 +193,7 @@ This is a shorthand property for setting 'motion-path', 'motion-position' and 'm
 <dt>If 'motion-path' specifies a valid basic shape, path or references a valid SVG <a href="">graphics element</a>:</dt>
 <dd>
   <ol>
-    <li>Let <var>path</var> be the geometry of the specified basic shape, path or references a valid SVG <a href="">graphics element</a>.</li>
+    <li>Let <var>path</var> be the geometry of the specified basic shape, path or SVG <a href="">graphics element</a> reference.</li>
     <li>Let <var>totalLength</var> be the total length of <var>path</var> with all sub-paths.</li>
     <li>Let <var>distance</var> be the compute value of 'motion-position':
       <dl class="switch">
