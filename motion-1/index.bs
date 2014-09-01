@@ -143,7 +143,7 @@ Value: [ auto | reverse ] && <<angle>>
 Initial: auto
 Applies to: All elements. In SVG, it applies to <a href="">container elements</a> excluding the <a href="">defs</a> element and all <a href="">graphics elements</a>
 Inherited: no
-Percentages: refer to the total path length
+Percentages: n/a
 Computed value: as specified
 Media: visual
 Animatable: yes
