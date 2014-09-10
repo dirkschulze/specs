@@ -8,6 +8,11 @@ Editor: Dirk Schulze, Adobe Systems Inc., dschulze@adobe.com
 Abstract: Motion paths allow authors to animate any graphical object along an author specified path.
 </pre>
 
+<details class="annoying-warning" open>
+  <summary>This document is obsolete.</summary>
+  This specification is not being actively maintained, and must not be used as a guide for implementations.  It must be considered obsolete. For the replacement spec, please see <a href="http://dev.w3.org/fxtf/motion-1/">http://dev.w3.org/fxtf/motion-1/</a>.
+</details>
+
 <h2 id="intro">Introduction</h2>
 
 <em>This section is not normative.</em>
